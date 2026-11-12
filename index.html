@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Atelier Lavande : créations artisanales faites main à Sousse, Tunisie.">
+  <title>Atelier Lavande – Créations artisanales</title>
+  <link rel="icon" href="logo.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+  <button class="btn-retour" onclick="history.back()" title="Page précédente">
+    <i class="fa-solid fa-arrow-left"></i>
+  </button>
+  <noscript><p style="padding:30px;text-align:center"> Ce site a besoin de JavaScript pour fonctionner. Active-le dans ton navigateur. </p></noscript>
+
+ 
+  <header>
+    <div class="logo" onclick="showPage('home')">
+      <img src="logo.svg" alt="Logo Atelier Lavande">
+      <div><b>Ryhem</b><small>Atelier Lavande</small></div>
+    </div>
+
+    <button class="burger" onclick="toggleMenu()" aria-label="Menu">☰</button>
+
+    <nav id="menu">
+      <a onclick="showPage('home')">Accueil</a>
+      <a onclick="showPage('shop')">Boutique</a>
+      <a onclick="showPage('about')">À propos</a>
+      <a onclick="showPage('contact')">Contact</a>
+      <a onclick="showPage('cart')" class="cart-link">Panier <b id="cartCount">0</b></a>
+      <button class="theme" id="themeBtn" onclick="changerTheme()" aria-label="Mode clair / sombre">🌙</button>
+    </nav>
+  </header>
+
+  <!-- 2. PAGES -->
+  <main>
+
+    <!-- ACCUEIL -->
+    <section class="page" id="page-home">
+
+      <div class="hero">
+        <div class="slide show">
+          <img src="images/hero-1.jpg" alt="Promotions">
+          <div class="caption">
+            <p class="hand">Promotions en cours</p>
+            <h1>Jusqu'à -25% sur la collection Lavande</h1>
+            <button class="btn" onclick="showPage('shop')">J'en profite</button>
+          </div>
+        </div>
+        <div class="slide">
+          <img src="images/hero-2.jpg" alt="Nouveautés">
+          <div class="caption">
+            <p class="hand">Nouveaux arrivages</p>
+            <h1>Les créations de la saison sont là</h1>
+            <button class="btn" onclick="showPage('shop')">Voir les nouveautés</button>
+          </div>
+        </div>
+        <div class="slide">
+          <img src="images/hero-3.jpg" alt="Gravure personnalisée">
+          <div class="caption">
+            <p class="hand">Événement spécial</p>
+            <h1>Offrez un bijou gravé à son prénom</h1>
+            <button class="btn" onclick="showPage('shop')">Personnaliser</button>
+          </div>
+        </div>
+        <button class="arrow left" onclick="changerSlide(-1)" aria-label="Précédent">‹</button>
+        <button class="arrow right" onclick="changerSlide(1)" aria-label="Suivant">›</button>
+        <div class="dots" id="dots"></div>
+      </div>
+
+      <section class="values">
+        <article class="value">
+          <div class="value-icon"><i class="fa-solid fa-hand-holding-heart"></i></div>
+          <div class="value-text">
+            <h3>100% fait main</h3>
+            <p>Chaque pièce est unique</p>
+          </div>
+        </article>
+        <article class="value">
+          <div class="value-icon"><i class="fa-solid fa-shield-halved"></i></div>
+          <div class="value-text">
+            <h3>Paiement sécurisé</h3>
+            <p>Vos données sont protégées</p>
+          </div>
+        </article>
+        <article class="value">
+          <div class="value-icon"><i class="fa-solid fa-truck-fast"></i></div>
+          <div class="value-text">
+            <h3>Livraison offerte</h3>
+            <p>Dès 250 DT d'achat</p>
+          </div>
+        </article>
+      </section>
+
+      <h2 class="title">Nos catégories</h2>
+      <div class="cats" id="catList"></div>
+
+      <h2 class="title">Produits populaires</h2>
+      <div class="grid" id="popularList"></div>
+
+      <h2 class="title">Promotions en cours</h2>
+      <div class="grid" id="promoList"></div>
+    </section>
+
+    <!-- BOUTIQUE -->
+    <section class="page" id="page-shop">
+      <h2 class="title">La boutique</h2>
+
+      <div class="filters">
+        <input id="search" placeholder="Rechercher par nom ou description…" oninput="filtrer()">
+
+        <select id="fCat" onchange="filtrer()">
+          <option value="all">Toutes les catégories</option>
+          <option value="bijoux">Bijoux</option>
+          <option value="vetements">Vêtements</option>
+          <option value="deco">Déco</option>
+          <option value="accessoires">Accessoires</option>
+        </select>
+
+        <select id="fPrix" onchange="filtrer()">
+          <option value="9999">Tous les prix</option>
+          <option value="100">Moins de 100 DT</option>
+          <option value="200">Moins de 200 DT</option>
+          <option value="300">Moins de 300 DT</option>
+        </select>
+
+        <select id="fCouleur" onchange="filtrer()"><option value="all">Toutes les couleurs</option></select>
+        <select id="fTaille" onchange="filtrer()"><option value="all">Toutes les tailles</option></select>
+
+        <label class="check"><input type="checkbox" id="fPromo" onchange="filtrer()"> En réduction</label>
+
+        <select id="fTri" onchange="filtrer()">
+          <option value="pop">Popularité</option>
+          <option value="asc">Prix croissant</option>
+          <option value="desc">Prix décroissant</option>
+        </select>
+      </div>
+
+      <div class="grid" id="shopList"></div>
+      <p id="noResult" class="center" style="display:none">Aucun produit trouvé.</p>
+      <div class="pagination" id="pagination"></div>
+    </section>
+
+    <!-- PRODUIT -->
+    <section class="page" id="page-product"></section>
+
+    <!-- PANIER -->
+    <section class="page" id="page-cart">
+      <h2 class="title">Mon panier</h2>
+      <div class="two-col">
+        <div id="cartList"></div>
+
+        <aside class="box">
+          <h3>Résumé</h3>
+          <div class="promo-row">
+            <input id="promoInput" placeholder="Code promo">
+            <button class="btn small" onclick="appliquerPromo()">OK</button>
+          </div>
+          <p id="promoMsg"></p>
+          <p class="line">Sous-total <b id="sSub">0 DT</b></p>
+          <p class="line">Réduction <b id="sRem">0 DT</b></p>
+          <p class="line">Livraison <b id="sLiv">0 DT</b></p>
+          <p class="line total">Total <b id="sTotal">0 DT</b></p>
+          <button class="btn full" onclick="allerPaiement()">Passer au paiement</button>
+          <small class="hint">Essayez : LUNE10 ou LAVANDE20</small>
+        </aside>
+      </div>
+    </section>
+
+    <!-- PAIEMENT -->
+    <section class="page" id="page-checkout">
+      <h2 class="title">Paiement sécurisé</h2>
+
+      <div class="two-col" id="checkoutBox">
+        <form onsubmit="validerPaiement(event)" novalidate>
+          <h3>Livraison</h3>
+          <label>Nom complet <input id="nom"><small id="e-nom"></small></label>
+          <label>Email <input id="email"><small id="e-email"></small></label>
+          <label>Adresse <input id="adresse"><small id="e-adresse"></small></label>
+          <label>Ville <input id="ville"><small id="e-ville"></small></label>
+
+          <h3>Moyen de paiement</h3>
+          <div class="moyens">
+            <label><input type="radio" name="moyen" value="carte" checked onchange="changerMoyen()"> Carte bancaire</label>
+            <label><input type="radio" name="moyen" value="paypal" onchange="changerMoyen()"> PayPal</label>
+            <label><input type="radio" name="moyen" value="stripe" onchange="changerMoyen()"> Stripe</label>
+          </div>
+
+          <div id="blocCarte">
+            <label>Numéro de carte <input id="carte" maxlength="19" placeholder="1234 5678 9012 3456" oninput="formaterCarte()"><small id="e-carte"></small></label>
+            <div class="deux">
+              <label>Expiration <input id="exp" maxlength="5" placeholder="MM/AA"><small id="e-exp"></small></label>
+              <label>CVV <input id="cvv" type="password" maxlength="3" placeholder="123"><small id="e-cvv"></small></label>
+            </div>
+          </div>
+
+          <button class="btn full" id="payBtn" type="submit">Payer maintenant</button>
+          <small class="hint">Simulation : aucun vrai paiement n'est effectué.</small>
+        </form>
+
+        <aside class="box"><h3>Récapitulatif</h3><div id="recap"></div></aside>
+      </div>
+
+      <div class="box center" id="confirmBox" style="display:none"></div>
+    </section>
+
+    <!-- À PROPOS -->
+    <section class="page" id="page-about">
+      <h2 class="title">À propos</h2>
+      <div class="about">
+        <img src="images/ryhem.jpg" alt="La créatrice de l'atelier">
+        <div>
+          <p class="hand">Notre histoire</p>
+          <p>Je m'appelle <b>Ryhem Chayeb</b> et je crée des bijoux, des vêtements et des objets de décoration faits main, dans mon atelier de Sousse.</p>
+          <p>Chaque pièce est pensée, fabriquée et emballée avec soin, avec des matières choisies : argent, lin, laine, cire de soja et céramique.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="page" id="page-contact">
+      <h2 class="title">Contact</h2>
+      <div class="box">
+        <ul class="contact-list">
+          <li>Email : <a href="mailto:ryhemchayeb1@gmail.com">ryhemchayeb1@gmail.com</a></li>
+          <li>Téléphone : <a href="tel:+21695511963">+216 95 511 963</a></li>
+          <li>Adresse : Sahloul, Sousse, Tunisie</li>
+          <li>Facebook : <a href="https://www.facebook.com/ryhem.chayeb/" target="_blank" rel="noopener">facebook.com/ryhem.chayeb</a></li>
+          <li>Instagram : <a href="https://www.instagram.com/ryheem.c/" target="_blank" rel="noopener">@ryheem.c</a></li>
+        </ul>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- 3. PIED DE PAGE -->
+  <footer class="footer">
+    <div class="footer-container">
+
+      <div class="footer-card footer-brand">
+        <h2>Atelier Lavande<span>.</span></h2>
+        <p>L'élégance de l'artisanat tunisien. Découvrez des créations uniques, confectionnées avec passion à Sousse.</p>
+        <div class="socials">
+          <a href="https://www.facebook.com/ryhem.chayeb/" target="_blank" rel="noopener" class="social facebook" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="https://www.instagram.com/ryheem.c/" target="_blank" rel="noopener" class="social instagram" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="https://wa.me/21695511963" target="_blank" rel="noopener" class="social whatsapp" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+        </div>
+      </div>
+
+      <div class="footer-card">
+        <h3>Navigation</h3>
+        <div class="footer-links">
+          <a onclick="showPage('home')">Accueil</a>
+          <a onclick="showPage('shop')">Notre boutique</a>
+          <a onclick="showPage('about')">À propos</a>
+          <a onclick="showPage('contact')">Contact</a>
+        </div>
+      </div>
+
+      <div class="footer-card footer-contact">
+        <h3>Contactez-nous</h3>
+        <p><i class="fa-solid fa-envelope"></i><a href="mailto:ryhemchayeb1@gmail.com">ryhemchayeb1@gmail.com</a></p>
+        <p><i class="fa-solid fa-phone"></i><a href="tel:+21695511963">+216 95 511 963</a></p>
+        <p><i class="fa-solid fa-location-dot"></i>Sahloul, Sousse, Tunisie</p>
+      </div>
+
+      <div class="footer-card footer-map">
+        <h3>Nous trouver</h3>
+        <iframe title="Localisation Atelier Lavande" src="https://www.google.com/maps?q=Sahloul,+Sousse,+Tunisie&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <p>Bienvenue chez Atelier Lavande ♡</p>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2026 Atelier Lavande. Tous droits réservés.</p>
+      <p>Créé avec <span>♥</span> par Ryhem Chayeb</p>
+    </div>
+  </footer>
+
+  <!-- 4. SCRIPT -->
+  <script src="js/script.js"></script>
+</body>
+</html>
